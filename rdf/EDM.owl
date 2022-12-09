@@ -57,8 +57,8 @@
       <dc:description xml:lang="en">The Europeana Data Model (EDM) is aimed at being an integration medium for collecting, connecting and enriching the descriptions provided by Europeana data providers. The RDF vocabulary for http://www.europeana.eu/schemas/edm/ defines the elements introduced by EDM (as opposed to the ones EDM re-uses from other namespaces).</dc:description>
       <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-03-25</dcterms:issued>
       <dc:modified rdf:datatype="http//www.w3.org/2001/XMLSchema#date">2016-04-01</dc:modified>
-      <owl:versionInfo>5.2.6</owl:versionInfo>
-      <radion:versionNotes xml:lang="en">The present specification is based on the document "Definition of the Europeana Data Model elements", originally edited by Carlo Meghini. It is aligned with the version 5.2.6 of these EDM Definitions.</radion:versionNotes>
+      <owl:versionInfo>5.2.9</owl:versionInfo>
+      <radion:versionNotes xml:lang="en">The present specification is based on the document "Definition of the Europeana Data Model elements", originally edited by Carlo Meghini. It is aligned with the version 5.2.9 of these EDM Definitions.</radion:versionNotes>
       <dc:creator><foaf:Person rdf:about="http://data.semanticweb.org/person/antoine-isaac" foaf:name="Antoine Isaac"/></dc:creator>
       <dc:contributor><foaf:Organization foaf:name="Participants of Europeana Version 1.0 Work Package on Further Specification of Functionality and Interoperability aspects of Europeana (WP3)"/></dc:contributor>
       <dc:contributor><foaf:Person rdf:about="http://pro.europeana.eu/person/hugo-manguinhas" foaf:name="Hugo Manguinhas"/></dc:contributor>
@@ -115,10 +115,19 @@ and ontology file EDM version 5.2.6 (EDM-v526-141201)
 1. Added namespace svcs and class svcs:Service
 2. Added property edm:intermediateProvider
 3. Deprecated edm:annotationOf and edm:userTag
+
+=======
+Changes between ontology file EDM version 5.2.9
+and ontology file EDM version 5.2.7 (edm-v527-160401)
+=======
+1. Added property edm:completeness
+2. Added property ore:lineage
+3. Updated the skos:definition of edm:ProvidedCHO to match the definition in the EDM Definition 5.2.9
+
       </vann:changes>
       <voaf:toDoList xml:lang="en">
 =======
-Remaining TODOs for ontology file EDM version 5.2.7
+Remaining TODOs for ontology file EDM version 5.2.9
 =======
 - finish and check FRBRoo mappings according to the recommendations of the EDM-FRBRoo task force. Also include implicit mappings and mappings for elements outside the EDM namespace?
 - try to capture formal cardinality constraints resulting from "Obligation and Occurrence" documentation, which should be attached to non-EDM constructs (esp. ore:Aggregation)
@@ -271,7 +280,7 @@ Persons are not items. This class represents Cultural Heritage Objects known to 
 
     <owl:Class rdf:about="&edm;ProvidedCHO">
         <rdfs:label xml:lang="en">Provided CHO</rdfs:label>
-        <skos:definition xml:lang="en">This class comprises the Cultural Heritage objects that Europeana collects descriptions about.</skos:definition>
+        <skos:definition xml:lang="en">This class includes the Cultural Heritage objects that Europeana collects descriptions about.</skos:definition>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
@@ -353,6 +362,17 @@ a URI.</skos:definition>
         <skos:definition xml:lang="en">This property holds the identifier given to the dataset in Europeana.</skos:definition>
         <skos:note xml:lang="en">To associate all objects belonging to one dataset. In the context of Europeana, the value of this property is provided by Europeana as part of the ingestion process. This property replaces edm:collectionName which is now deprecated.</skos:note>
         <rdfs:domain rdf:resource="&dcat;Dataset"/>
+    </owl:ObjectProperty>
+
+
+    <!-- http://www.europeana.eu/schemas/edm/completeness -->
+
+    <owl:ObjectProperty rdf:about="&edm;completeness">
+        <rdfs:label xml:lang="en">Completeness</rdfs:label>
+        <skos:definition xml:lang="en">A measurement of the availability of metadata properties.</skos:definition>
+        <skos:note xml:lang="en">The completeness metric measures the presence of metadata fields within a record, which are important for key functionalities of the Europeana portal.</skos:note>
+		<skos:example xml:lang="en">The values are numbers between 0 and 10. The higher the value, the more complete the record is.</skos:example>    
+        <rdfs:domain rdf:resource="&edm;EuropeanaAggregation"/>
     </owl:ObjectProperty>
 
     <!-- http://www.europeana.eu/schemas/edm/currentLocation -->
@@ -936,7 +956,8 @@ born digital object.</skos:definition>
     <owl:Class rdf:about="&ore;Proxy"/>
     <owl:Class rdf:about="&dcat;Dataset"/>
     <owl:Class rdf:about="&cc;License"/>
-    <owl:Class rdf:about="&cc;License"/>
     <owl:Class rdf:about="&svcs;Service"/>
 
    </rdf:RDF>
+
+
